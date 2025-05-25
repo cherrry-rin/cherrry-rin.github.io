@@ -25,64 +25,88 @@
             <img src="/фото/карта.png" alt="">
         </div>
 
-       <div class="feedback">
-        <div class="container">
-            <h2>Say hello</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing .</p>
+    
+  <div class="feedback">
+    <div class="container">
+      <h2>Say hello</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing .</p>
 
-            <form>
-                <div class="inline">
-                    <div>
-                        <label> First name</label>
-                        <input type="text">
-                    </div>
-                    <div>
-                        <label>Last name</label>
-                        <input type="text">
-                    </div>
-                </div>
-                <label>Email Address</label>
-                <input type="email" class="one-line">
+      <form id="contactForm">
+        <div class="inline">
 
-                <label>Message</label>
-                <textarea class="one-line"></textarea>
-
-                <button type="button">Get in touch</button>
-            </form>
+          <div>
+            <label>First name</label>
+            <input type="text" id="firstName" required>
+          </div>
+          <div>
+            <label>Last name</label>
+            <input type="text" id="lastName" required>
+          </div>
         </div>
-       </div> 
+        <label>Email Address</label>
+        <input type="email" id="email" required>
 
-    <footer>
-        <div class="blocks container">
-            <div>
-                <span class="logo">Gym</span>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-            </div>
-            <div>
-                <h4>About us</h4>
-                <ul>
-                    <li>Portfolio</li>
-                    <li>Careers</li>
-                    <li>Contact us</li>
-                </ul>
-            </div>
-            <div>
-                <h4>Contact us</h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                <p>+909-678-56-76</p>
-            </div>
-        </div>
-        <hr>
-        <p> ® 2025 GYM.COM.Все права защищены</p>
-    </footer>
-        <script>
-        function checkForm() {
-            let form = document.querySelector('#emailField').value;
-            if (!form.includes("@")) alert('Нет символа @');
-            else if (!form.includes(".")) alert('Нет символа .');
-            else alert('все топ!')
-        }
-    </script>
+        <label>Message</label>
+        <textarea id="message" required></textarea>
+        <button type="submit">Get in touch</button>
+      </form>
+      <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const formData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value
+          };
+
+          try {
+            const response = await fetch('https://cherrry-rin.github.io/sportgym.github.io/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+              alert('Сообщение отправлено!');
+              document.getElementById('contactForm').reset();
+            } else {
+              alert('Ошибка отправки');
+            }
+          } catch (error) {
+            alert('Ошибка сети: ' + error.message);
+          }
+        });
+      </script>
+    </div>
+  </div>
+
+  <footer>
+    <div class="blocks container">
+      <div>
+        <span class="logo">Gym</span>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+      </div>
+      <div>
+        <h4>About us</h4>
+        <ul>
+          <li>Zeux</li>
+          <li>Portfolio</li>
+          <li>Careers</li>
+          <li>Contact us</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact us</h4>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p>+909-678-56-76</p>
+      </div>
+    </div>
+    <hr>
+    <p> ® 2025 GYM.COM.Все права защищены</p>
+  </footer>
 </body>
-
 </html>
